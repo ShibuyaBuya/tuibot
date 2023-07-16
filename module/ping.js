@@ -1,4 +1,4 @@
 module.exports.run = function (msg, client, cmsg){
-    cmsg.reply("Processing!");
-    return "Pong -> Responded";
+    cmsg.reply("_Processing!_");
+    return "Pong -> *Responded*";
 }
