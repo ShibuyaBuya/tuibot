@@ -30,13 +30,6 @@ client.on('message', async (message) => {
 
         await message.reply(`Hello ${name}!`);
         await commands(msg, client, message);
-    }else if (msg[0] == "whoami"){
-        message.reply(`
-# *WHOAMI*
-Platform ${platform}
-Release ${release}
-_CentOS_
-`);
     }
 });
 client.initialize();
