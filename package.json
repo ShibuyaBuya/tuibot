@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.21.0"
+  },
+  "name": "tuibot",
+  "description": "A whatsap bot with firebase database",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "bot": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
