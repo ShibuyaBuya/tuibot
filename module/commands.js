@@ -10,6 +10,13 @@ module.exports.commands = function (msg, client, clientMsg) {
         `;
 
 
+    }else if (msg[1] == "whoami"){
+        result = `
+# *WHOAMI*
+Platform ${platform}
+Release ${release}
+_CentOS_
+`;
     }else{
         result = `
 ${msg}: Maybe the command is not added or maintenance
