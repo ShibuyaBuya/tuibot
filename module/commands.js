@@ -1,3 +1,7 @@
+const os = require('os');
+
+const platform = os.platform();
+const release = os.release();
 module.exports.commands = function (msg, client, clientMsg) {
     var result;
 
