@@ -12,7 +12,7 @@ module.exports.commands = function (msg, client, clientMsg) {
 
     }else{
         result = `
-$msg: Maybe the command is not added or maintenance
+${msg}: Maybe the command is not added or maintenance
         `;
     }
     clientMsg.reply(result);
