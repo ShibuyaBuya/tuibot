@@ -1,7 +1,8 @@
 # tuibot
-A whatsap bot with firebase database
+WhatsApp Bot
 
-# Test
-```javascript
-console.log("hello");
+# install
+```bash
+chmod +x install.sh
+./install.sh
 ```
