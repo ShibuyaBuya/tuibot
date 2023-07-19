@@ -22,14 +22,24 @@ client.on('ready', () => {
 client.on('message', async (message) => {
     const msg = await message.body.split('/');
     const contact = await message.getContact();
+    const chat = await message.getChat();
+    const chatId = await message.getChatId();
+    const chatName = await chat.name;
+    const group = await message.isGroupMsg;
+    const number = await contact.number;
+    const id = await contact.id;
+    const profile = await contact.profilePicUrl;
+
     const name = contact.pushname;
     const sender = await message.from;
     const timestamp = message.timestamp;
     if (msg[0] == "tui"){
+
         await message.reply(`Hello ${name}!`);
         await commands(msg, client, message);
     }
 });
+
 client.initialize();
 const tes = 0;
           
