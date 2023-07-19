@@ -1,6 +1,20 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+<<<<<<< HEAD
+const { run } = require('./autoreply.js');
+// Mendatopatkan PWD (working directory)
+const pwd = path.resolve(__dirname);
+const platform = os.platform();
+const release = os.release();
+module.exports.PERMISSION = function (){
+    return "COMMANDS::23; SYSTEM_MODULE; _IMPORTANT; *;";
+}
+module.exports.run = function (msg, client, cmsg){
+    return "don't use this";
+}
+module.exports.commands = function (msg, client, clientMsg, ct) {
+=======
 
 // Mendapatkan PWD (working directory)
 const pwd = path.resolve(__dirname);
@@ -10,6 +24,7 @@ module.exports.run = function (msg, client, cmsg) {
     return "don't use this";
 }
 module.exports.commands = function (msg, client, clientMsg) {
+>>>>>>> bbf623001888e193dd82e0d0158b2941bb972317
     var result;
     const modul = `./${msg[1]}.js`;
     if (msg[1] == "menu") {
@@ -39,6 +54,13 @@ _CentOS_
 ${msg}: Maybe the command is not added or maintenance, Thank you :)
             `;
 	}
+<<<<<<< HEAD
+    }
+    if (!result.startsWith("visible_false;")){
+	clientMsg.reply(result);
+    }
+=======
     }
     clientMsg.reply(result);
+>>>>>>> bbf623001888e193dd82e0d0158b2941bb972317
 }
