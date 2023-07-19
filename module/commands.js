@@ -16,23 +16,23 @@ module.exports.commands = function (msg, client, clientMsg) {
     var result = "";
     const modul = `./${msg[1]}.js`;
     if (msg[1] == "menu") {
-        result = `
+        clientMsg.reply(`
 # *PWD*
 @ ${pwd}
 # *MENU*
 @ tui/menu - Menu
 @ tui/whoami - Whoami, usage: tui/whoami
 @ tui/set - To set something for documentation write tui/set -Doc
-        `;
+        `);
 
 
     }else if (msg[1] == "whoami"){
-	result = `
+	clientMsg.reply(`
 # *WHOAMI*
 Platform ${platform}
 Release ${release}
 _CentOS_
-`;
+`);
     }else{
 	if (fs.existsSync(`./module/${msg[1]}.js`)){
 	    const { run } = require(modul);
