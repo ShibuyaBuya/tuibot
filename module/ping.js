@@ -4,5 +4,5 @@ module.exports.PERMISSION = function (){
 }
 module.exports.run = function (msg, client, cmsg){
     cmsg.reply("_Processing!_");
-    return "Pong -> *Responded*";
+    cmsg.reply("Pong -> *Responded*");
 }

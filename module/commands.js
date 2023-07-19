@@ -36,14 +36,14 @@ _CentOS_
     }else{
 	if (fs.existsSync(`./module/${msg[1]}.js`)){
 	    const { run } = require(modul);
-	    result = `${run(msg, client, clientMsg)}`;
+	    run(msg, client, clientMsg);
 	}else{
-            result = `
+            clientMsg.reply(`
 ${msg}: Maybe the command is not added or maintenance, Thank you :)
-            `;
+            `);
 	}
     }
-    if (!result.startsWith("visible_false;")){
-	clientMsg.reply(result);
-    }
+ 
+
+
 }

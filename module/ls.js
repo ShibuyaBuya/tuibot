@@ -42,5 +42,5 @@ Total module: *${lengthM}*
 
 `);
     });
-    return "visible_false;";
+
 }
