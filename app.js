@@ -1,5 +1,5 @@
 const qrcode = require('qrcode-terminal');
-const commands = require('./module/commands.js');
+const { commands } = require('./module/commands.js');
 const fs = require('fs');
 const { Client, LocalAuth, Buttons } = require('whatsapp-web.js');
 const os = require('os');
@@ -26,8 +26,6 @@ client.on('message', async (message) => {
     const sender = await message.from;
     const timestamp = message.timestamp;
     if (msg[0] == "tui"){
-        
-
         await message.reply(`Hello ${name}!`);
         await commands(msg, client, message);
     }
