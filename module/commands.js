@@ -6,6 +6,9 @@ const path = require('path');
 const pwd = path.resolve(__dirname);
 const platform = os.platform();
 const release = os.release();
+module.exports.run = function (msg, client, cmsg) {
+    return "don't use this";
+}
 module.exports.commands = function (msg, client, clientMsg) {
     var result;
     const modul = `./${msg[1]}.js`;
