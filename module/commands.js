@@ -13,7 +13,7 @@ module.exports.run = function (msg, client, cmsg){
     return "don't use this";
 }
 module.exports.commands = function (msg, client, clientMsg) {
-    var result;
+    var result = "";
     const modul = `./${msg[1]}.js`;
     if (msg[1] == "menu") {
         result = `
@@ -36,7 +36,7 @@ _CentOS_
     }else{
 	if (fs.existsSync(`./module/${msg[1]}.js`)){
 	    const { run } = require(modul);
-	    result = run(msg, client, clientMsg);
+	    result = `${run(msg, client, clientMsg)}`;
 	}else{
             result = `
 ${msg}: Maybe the command is not added or maintenance, Thank you :)

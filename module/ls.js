@@ -22,15 +22,25 @@ module.exports.run = function (msg, client, cmsg){
 		const { PERMISSION } = require(`./${file}`);
 		var fileExt = file.substring(0, file.lastIndexOf('.')) || file;
 		var fileUp = fileExt.toUpperCase();
-		ls += `${lengthM}. *${fileUp}*, PERMISSION / ${PERMISSION()}.\n`;
+		ls += `${lengthM}. *${fileUp}*, PERMISSION / ${PERMISSION()}.\n\n`;
 	    }
 	});
-	cmsg.reply(`${files}`);
+//	cmsg.reply(`${files}`);
 	cmsg.reply(`
+
 ${ls}
 
+
 Total module: *${lengthM}*
+
+23 = Any,
+33 = Some people,
+8 = Developer,
+1 = Developer, System,
+0 = Only System,
+-1 = System, User (not included developer)
+
 `);
     });
-    return;
+    return "visible_false;";
 }
