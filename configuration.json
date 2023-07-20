@@ -1,0 +1,10 @@
+
+{
+    "dburl": "https://t-ui-af1c8-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "messageFromDeveloper#THIS IS A COMMENT": "change this to your own firebase realtime database url",
+    "botname": "T-UI",
+    "developer": "ShibuyaBuya",
+    "github": "https://github.com/ShibuyaBuya/tuibot",
+    "developer_number":[],
+    "reference": "bot_wa"
+}

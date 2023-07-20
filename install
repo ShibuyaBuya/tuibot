@@ -2,3 +2,7 @@
 npm i whatsapp-web.js
 npm i qrcode-terminal
 npm i express
+npm i firebase-admin
+echo "Done installing required packages"
+echo "Dont forget to add your firebase credential/serviceAccountKey to the project to folder named 'firebase_module'"
+echo "Dont forget to add your firebase realtime database url to configuration.json file, change dburl to your database url"

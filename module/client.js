@@ -15,7 +15,6 @@ module.exports.run = async (msg, client, cmsg) => {
     const ChatType = await chat.type;
     const id = await contact.id;
     const profile = await contact.profilePicUrl;
-
     const name = await contact.pushname;
     const sender = await message.from;
     const clientAbout = `
@@ -25,7 +24,6 @@ module.exports.run = async (msg, client, cmsg) => {
     # *DATA*
     ID: ${id._serialized} or ${ids._serialized}
     ChatType: ${ChatType}
-
     Name: ${name}
     Semder: ${sender}
     ChatIsGroup: ${chat}
@@ -35,5 +33,4 @@ module.exports.run = async (msg, client, cmsg) => {
     `;
     console.log(clientAbout);
     await cmsg.reply(clientAbout);
-
 }

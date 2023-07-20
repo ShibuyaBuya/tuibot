@@ -1,6 +1,7 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const busybox = require('../js_busybox/busybox.js');
 const { run } = require('./autoreply.js');
 // Mendatopatkan PWD (working directory)
 const pwd = path.resolve(__dirname);
@@ -15,23 +16,14 @@ module.exports.run = function (msg, client, cmsg){
 module.exports.commands = function (msg, client, clientMsg) {
     var result = "";
     const modul = `./${msg[1]}.js`;
-    if (msg[1] == "menu") {
-        clientMsg.reply(`
-# *PWD*
-@ ${pwd}
-# *MENU*
-@ tui/menu - Menu
-@ tui/whoami - Whoami, usage: tui/whoami
-@ tui/set - To set something for documentation write tui/set -Doc
-        `);
-
-
-    }else if (msg[1] == "whoami"){
+	if (msg[1] == "whoami"){
 	clientMsg.reply(`
 # *WHOAMI*
 Platform ${platform}
 Release ${release}
 _CentOS_
+User ${busybox.whoami}
+This command is built-in, not a module. :)
 `);
     }else{
 	if (fs.existsSync(`./module/${msg[1]}.js`)){
