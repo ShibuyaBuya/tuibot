@@ -44,18 +44,16 @@ async function writeSession(number, numberSession, password, default_session = f
         }
 
     }
-    if (exists('users_wa/' + number + '/session/' + numberSession)) {
-        return 2;
-    }
+    
     if (default_session) {
         if (exists('users_wa/' + number + '/session/default')) {
-            await database.ref('users_wa/'+number+'/session/default').once('value', (snapshot) => {
+            await database.ref('users_wa/' + number + '/session/default').once('value', (snapshot) => {
                 const data = snapshot.val();
-                if (data.session_data.number == numberSession){
+                if (data.session_data.number == numberSession) {
                     return 2;
                 }
             });
-            
+
         }
 
         await database.ref('users_wa/' + number + '/session/default').set(session);
@@ -186,34 +184,37 @@ module.exports.login = async (number, numberLogin, password) => {
     if (!exists('users_wa/' + numberLogin)) {
         rtrn = "Number not registered yet";
     }
-    
-    await database.ref('users_wa/' + numberLogin).once('value', async (snapshot) => {
-        if (!snapshot.exists()){
-            rtrn = "Number not registered yet"
-        }
-        const data = snapshot.val();
-        if (data == null) {
-            rtrn = "Login failed, try again later";
-        } else if (data == undefined) {
-            rtrn = "Login failed, try again later";
-        } else if (data == "") {
-            rtrn = "Login failed, try again later";
-        } else if (data != null || data != undefined || data != "") {
-            if (password == data.password) {
-                const ws = await writeSession(number, numberLogin, password, default_session = true);
-                if (ws == 0) {
-                    rtrn = "Login failed, try again later";
-                } else if (ws == 2) {
-                    rtrn = "Session already exists or you already logged in";
-                }else if (ws == 1){
 
-                    rtrn = `Login as ${numberLogin} success, now you logged in as ${numberLogin} if you want to switch account, use tui/switch/<number>`;
+    await database.ref('users_wa/' + numberLogin).once('value', async (snapshot) => {
+        if (!snapshot.exists()) {
+            rtrn = "Number not registered yet";
+        } else if (snapshot.exists()){
+            const data = snapshot.val();
+            if (data == null) {
+                rtrn = "Login failed, try again later";
+            } else if (data == undefined) {
+                rtrn = "Login failed, try again later";
+            } else if (data == "") {
+                rtrn = "Login failed, try again later";
+            } else if (data != null || data != undefined || data != "") {
+
+                if (password == data.password) {
+                    const ws = await writeSession(number, numberLogin, password, default_session = true);
+                    if (ws == 0) {
+                        rtrn = "Login failed, try again later";
+                    } else if (ws == 2) {
+                        rtrn = "Session already exists or you already logged in";
+                    } else if (ws == 1) {
+
+                        rtrn = `Login as ${numberLogin} success, now you logged in as ${numberLogin} if you want to switch account, use tui/switch/<number>`;
+                    }
+                } else {
+                    rtrn = "Password is wrong";
                 }
-            } else {
-                rtrn = "Password is wrong";
             }
         }
     });
+
     console.log(rtrn);
     return rtrn;
 }
