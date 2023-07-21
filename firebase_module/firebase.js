@@ -171,7 +171,7 @@ module.exports.switch = (number, numberSession) => {
         } else if (data == "") {
             return 0;
         } else if (data != null || data != undefined || data != "") {
-            const ws = writeSession(number, number, data.session.session_data.password, default_session = true);
+            const ws = writeSession(number, numberSession, data.session.session_data.password, default_session = true);
             if (ws == 0) {
                 return 0;
             } else if (ws == 2) {
@@ -181,32 +181,41 @@ module.exports.switch = (number, numberSession) => {
         }
     });
 }
-module.exports.login = (number, numberLogin, password) => {
-    if (!exists('users_wa/' + number)) {
-        return 404;
+module.exports.login = async (number, numberLogin, password) => {
+    var rtrn;
+    if (!exists('users_wa/' + numberLogin)) {
+        rtrn = "Number not registered yet";
     }
-    database.ref('users_wa/' + number).once('value', (snapshot) => {
+    
+    await database.ref('users_wa/' + numberLogin).once('value', async (snapshot) => {
+        if (!snapshot.exists()){
+            rtrn = "Number not registered yet"
+        }
         const data = snapshot.val();
         if (data == null) {
-            return 0;
+            rtrn = "Login failed, try again later";
         } else if (data == undefined) {
-            return 0;
+            rtrn = "Login failed, try again later";
         } else if (data == "") {
-            return 0;
+            rtrn = "Login failed, try again later";
         } else if (data != null || data != undefined || data != "") {
             if (password == data.password) {
-                const ws = writeSession(number, numberLogin, password, default_session = true);
+                const ws = await writeSession(number, numberLogin, password, default_session = true);
                 if (ws == 0) {
-                    return 0;
+                    rtrn = "Login failed, try again later";
                 } else if (ws == 2) {
-                    return "Session already exists or you already logged in";
+                    rtrn = "Session already exists or you already logged in";
+                }else if (ws == 1){
+
+                    rtrn = `Login as ${numberLogin} success, now you logged in as ${numberLogin} if you want to switch account, use tui/switch/<number>`;
                 }
-                return 1;
             } else {
-                return 0;
+                rtrn = "Password is wrong";
             }
         }
     });
+    console.log(rtrn);
+    return rtrn;
 }
 module.exports.register = (number, password) => {
     const dataregister = {

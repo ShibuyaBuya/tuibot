@@ -12,24 +12,31 @@ module.exports.run = async (msg, client, cmsg) => {
         /*if (msg[2].endsWith("@c.us")){
             numbers = msg[2].replace("@c.us", "");
         }*/
-        const logins = firebase.login(number, numbers, msg[3]);
-        if (logins == 0){
+        const logins = await firebase.login(number, numbers, msg[3]);
+        await cmsg.reply(logins);
+        /*if (logins == 0){
             cmsg.reply("Login failed, try again later");
         }else if (logins == 1){
             cmsg.reply(`Login to ${number} success, now you logged in as ${msg[2]} if you want to switch account, use tui/switch/<number>`);
         }else if (logins == 404){
             cmsg.reply("Number not registered yet");
-        }
+        }else{
+            cmsg.reply(logins);
+        }*/
     }else if (msg.length == 3){
         
-        const logins = firebase.login(number, number, msg[2]);
-        if (logins == 0){
+        const logins = await firebase.login(number, number, msg[2]);
+        console.log(logins)
+        await cmsg.reply(logins);
+        /*if (logins == 0){
             cmsg.reply("Login failed, try again later");
         }else if (logins == 1){
             cmsg.reply(`Login to ${number} success, now you logged in as ${msg[2]} if you want to switch account, use tui/switch/<number>`);
         }else if (logins == 404){
             cmsg.reply("Number not registered yet");
-        }
+        }else{
+            cmsg.reply(logins);
+        }*/
     }else if (msg.length == 2){
         cmsg.reply("How to use: tui/login/<number>/<password>, but you can also use tui/login/<password> if you want to login with your own number");
     }
