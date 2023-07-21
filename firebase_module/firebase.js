@@ -44,21 +44,24 @@ async function writeSession(number, numberSession, password, default_session = f
         }
 
     }
-    
+
     if (default_session) {
-        if (exists('users_wa/' + number + '/session/default')) {
-            await database.ref('users_wa/' + number + '/session/default').once('value', (snapshot) => {
-                const data = snapshot.val();
+        //if (exists('users_wa/' + number + '/session/default')) {
+        await database.ref('users_wa/' + number + '/session/default').once('value', async (snapshot) => {
+            if (snapshot.exists()) {
+                const data = await snapshot.val();
+                console.log(data);
                 if (data.session_data.number == numberSession) {
                     return 2;
                 }
-            });
+            }
+        });
 
-        }
+        //}
 
         await database.ref('users_wa/' + number + '/session/default').set(session);
-        await database.ref('users_wa/' + number + '/session/default').once('value', (snapshot) => {
-            const check = snapshot.val();
+        await database.ref('users_wa/' + number + '/session/default').once('value', async (snapshot) => {
+            const check = await snapshot.val();
             if (check == null) {
                 return 0;
             } else if (check == undefined) {
@@ -70,12 +73,18 @@ async function writeSession(number, numberSession, password, default_session = f
             }
         });
     }
-    if (exists('users_wa/' + number + '/session/' + numberSession)) {
+    /*if (exists('users_wa/' + number + '/session/' + numberSession)) {
         return 2;
-    }
+    }*/
+    await database.ref('users_wa/' + number + '/session/' + numberSession).once('value', async (snapshot) => {
+        if (snapshot.exists()){
+            return 2;
+        }
+    });
     await database.ref('users_wa/' + number + '/session/' + numberSession).set(session);
-    await database.ref('users_wa/' + number + '/session/' + numberSession).once('value', (snapshot) => {
-        const check = snapshot.val();
+    await database.ref('users_wa/' + number + '/session/' + numberSession).once('value', async (snapshot) => {
+
+        const check = await snapshot.val();
         if (check == null) {
             return 0;
         } else if (check == undefined) {
@@ -85,6 +94,7 @@ async function writeSession(number, numberSession, password, default_session = f
         } else if (check != null || check != undefined || check != "") {
             return 1;
         }
+
     });
 
 }
@@ -188,7 +198,7 @@ module.exports.login = async (number, numberLogin, password) => {
     await database.ref('users_wa/' + numberLogin).once('value', async (snapshot) => {
         if (!snapshot.exists()) {
             rtrn = "Number not registered yet";
-        } else if (snapshot.exists()){
+        } else if (snapshot.exists()) {
             const data = snapshot.val();
             if (data == null) {
                 rtrn = "Login failed, try again later";
