@@ -10,7 +10,7 @@ module.exports.run = async (msg, client, cmsg) => {
         return;
     }
     
-    if (isNaN(msg[2]) || isFinite(msg[2]) || msg[2] == Infinity || msg[2] == -Infinity || msg[2] == "Infinity") {
+    if (isNaN(msg[2]) || msg[2] == "Infinity" || msg[2] == "-Infinity") {
         cmsg.reply("Please specify the amount of topup");
         return;
     }
