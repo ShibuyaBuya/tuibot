@@ -11,11 +11,11 @@ module.exports.run = function (msg, client, cmsg){
     // Membaca isi direktori
     fs.readdir(directoryPath, (err, files) => {
 	if (err) {
-	    return 'Gagal membaca direktori:' + err;
+	    cmsg.reply('error reading module:' + err);
 	}
     
     // Menampilkan daftar file dalam direktor
-	console.log(files);
+
 	files.forEach((file) => {
 	    if (file.endsWith(".js")){
 		lengthM++;

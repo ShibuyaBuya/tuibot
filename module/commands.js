@@ -28,6 +28,7 @@ This command is built-in, not a module. :)
 `);
     } else {
         const firebase_module = require('../firebase_module/firebase.js');
+        const database = require('../firebase_module/connect.js').database;
         const contact = await clientMsg.getContact();
         const id = await contact.id;
         const idGood = id._serialized.replace("@c.us", "");
@@ -36,28 +37,15 @@ This command is built-in, not a module. :)
             run(msg, client, clientMsg);
             return;
         }
-        const checkAccount = firebase_module.checkAccount(`${idGood}`);
-        console.log(checkAccount);
-        if (!checkAccount) {
+
+        //console.log(checkAccount);
+        var exs;
+        database.ref('users_wa/' + idGood).once('value', (snapshot) => {
+            exs = snapshot.exists();
+            
+        });
+        if (exs == false) {
             clientMsg.reply("Account not registered yet, please register first");
-            return;
-        }
-        if (msg[1] == "session") {
-            const { run } = require('./session.js');
-            run(msg, client, clientMsg);
-            return;
-        }
-        if (msg[1] == "login"){
-            const { run } = require('./login.js');
-            run(msg, client, clientMsg);
-            return;
-        }
-        const checkLogin = firebase_module.checkLoginState(`${idGood}`);
-        if (checkLogin == 0) {
-            clientMsg.reply("セッションでエラーが発生しました。ログアウトして再度ログインしてください。");
-            return;
-        } else if (checkLogin == 404) {
-            clientMsg.reply("セッションが見つかりませんでした。ログインしてください。");
             return;
         }
         if (fs.existsSync(`./module/${msg[1]}.js`)) {
