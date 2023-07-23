@@ -5,16 +5,17 @@ module.exports.run = async (msg, client, cmsg) => {
     const firebase = require('../firebase_module/firebase.js');
     const contact = await cmsg.getContact();
     const number = contact.id._serialized;
-    const checkAccount = firebase.checkAccount(number.replace("@c.us", ""));
+    /*const checkAccount = firebase.checkAccount(number.replace("@c.us", ""));
     if (checkAccount == true){
         cmsg.reply("You already registered");
         return;
-    }
+    }*/
     if (msg.length == 2){
-        cmsg.reply("How to use: tui/register/<username>");
+        cmsg.reply("How to use: !register/<username>");
         return;
     }
     const register = firebase.register(number.replace("@c.us", ""), msg[2]);
-    cmsg.reply(`${register}`);
+    console.log(register);
+    cmsg.reply(register);
     return;
 }

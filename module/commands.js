@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const busybox = require('../js_busybox/busybox.js');
 
-const { run } = require('./autoreply.js');
+
 // Mendatopatkan PWD (working directory)
 const pwd = path.resolve(__dirname);
 const platform = os.platform();
@@ -42,22 +42,25 @@ This command is built-in, not a module. :)
         var exs;
         database.ref('users_wa/' + idGood).once('value', (snapshot) => {
             exs = snapshot.exists();
-            
-        });
-        if (exs == false) {
-            clientMsg.reply("Account not registered yet, please register first");
-            return;
-        }
-        if (fs.existsSync(`./module/${msg[1]}.js`)) {
-            const { run } = require(modul);
-            run(msg, client, clientMsg);
-        } else {
-            clientMsg.reply(`
+            if (exs == false) {
+                clientMsg.reply("Account not registered yet, please register first");
+                return;
+            }
+            if (fs.existsSync(`./module/${msg[1]}.js`)) {
+                const { run } = require(modul);
+                run(msg, client, clientMsg);
+                return;
+            } else {
+                clientMsg.reply(`
 ${msg}: Maybe the command is not added or maintenance, Thank you :)
             `);
-        }
-    }
+                return;
+            }
 
+        });
+
+    }
+    return;
 
 
 }

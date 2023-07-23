@@ -1,0 +1,1 @@
+// buat transaksi untuk mencatat jejak transaksi, topup, game, dll dengan id transaksi khusus dan jika transaksi valid atau berhasil di proses maka coin atau transaksi berjalan/ selesai dengan return true
