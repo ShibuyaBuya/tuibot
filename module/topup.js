@@ -77,7 +77,7 @@ module.exports.run = async (msg, client, cmsg) => {
                         console.log(coinNow);
                         database.ref('users_wa/' + number).update({ coin: coinNow });
     
-                         client.sendMessage(number+"@c.us", "Successfully topup $ "+coin+"\nThanks good people!");
+                        client.sendMessage(number+"@c.us", "Successfully topup $ "+coin+"\nThanks good people!");
                         cmsg.reply("Topup success");
                         return;
                     } else {
