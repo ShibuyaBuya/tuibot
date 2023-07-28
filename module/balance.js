@@ -14,7 +14,6 @@ module.exports.run = async (msg, client, cmsg) => {
 Hi *${data.user}*!
     
 Your balance: $ *${data.coin}*
-Account Status: *${data.status}*
 
 Your role is *${firebase_module.roleParse(data.role)}*,
 thanks for participating in this project

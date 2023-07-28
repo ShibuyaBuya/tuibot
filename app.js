@@ -20,8 +20,18 @@ client.on('ready', () => {
     console.log('Client is ready!');
     const database = require('./firebase_module/connect.js').database;
     console.log('Connectimg to firebase...')
-    database.ref('users_wa').once('value', (snapshot) => {
-       console.log("Connected to firebase");
+    database.ref('users_wa').on('value', (snapshot) => {
+        console.log(snapshot.val());
+        const keys = Object.keys(snapshot.val())
+        console.log(keys);
+        for (var key of keys){
+            console.log(key);
+            if (snapshot.val()[key].aquamen == undefined || snapshot.val()[key].aquamen == null) {
+                database.ref('users_wa/' + key).update({aquamen: { status: { banned: false, suspended: false, time: 0, reason: ""} }});
+            }
+        }
+
+        console.log("Connected to firebase");
 
         return;
     });

@@ -42,7 +42,7 @@ User: ${user_registered}
 
 # STAFF COMMANDS
 # *!topup* - Topup balance
-# *!ban* - Ban user (coming soon)
+# *!ban* - Ban user 
 # *!unban* - Unban user (coming soon)
 # *!suspend* - Suspend user (coming soon)
 # *!unsuspend* - Unsuspend user (coming soon)

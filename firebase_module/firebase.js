@@ -78,8 +78,7 @@ module.exports.register = (number, username) => {
         user: username,
 
         coin: 0,
-        role: -1,
-        status: 1
+        role: -1
     }
     var result = "";
 
