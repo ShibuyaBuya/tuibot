@@ -110,7 +110,7 @@ function convertMsToTime(milliseconds) {
     let weeks = Math.floor(days / 7);
     let months = Math.floor(days / 30);
     let years = Math.floor(months / 12);
-    
+
 
     seconds = seconds % 60;
     minutes = minutes % 60;
@@ -127,4 +127,5 @@ function convertMsToTime(milliseconds) {
     return ` ${padTo1Digits(years)}Years ${padTo1Digits(months)}Months ${padTo1Digits(days)}Days ${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(
         seconds,
     )}`;
+    
 }
